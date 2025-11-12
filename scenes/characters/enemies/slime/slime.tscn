@@ -27,7 +27,6 @@ radius = 9.0
 rotates = false
 loop = false
 script = ExtResource("1_8m6xb")
-metadata/_custom_type_script = "uid://c16sg7sgl3hm5"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9.856)

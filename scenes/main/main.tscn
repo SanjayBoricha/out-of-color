@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://whi5t1pok5d"]
+[gd_scene load_steps=2 format=3 uid="uid://whi5t1pok5d"]
+
+[ext_resource type="PackedScene" uid="uid://dppm63cfggjih" path="res://scenes/maps/grass/grass_map.tscn" id="1_hyk8p"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 323)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -11,6 +14,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 585.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -29,3 +33,5 @@ layout_mode = 2
 [node name="TurretBuyContainer" type="PanelContainer" parent="UI/HUD/TurretsPanel/Turrets"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+
+[node name="GrassMap" parent="." instance=ExtResource("1_hyk8p")]
