@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var color_button: TextureButton = $Control/ColorButton
+@onready var color_button: TextureButton = %ColorButton
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var panel_container: PanelContainer = $CanvasLayer/PanelContainer
 
@@ -109,28 +109,17 @@ func try_get_closest_target():
 		current_target = closest_area.get_parent()
 
 func open_details_pane():
-	#var turretDetailsScene := preload("res://Scenes/ui/turretUI/turret_details.tscn")
-	#var details := turretDetailsScene.instantiate()
-	#details.turret = self
-	#draw_range = true
-	#queue_redraw()
-	#Globals.hud.add_child(details)
-	#Globals.hud.open_details_pane = details
-	pass
+	canvas_layer.visible = true
+	var viewport_pos = position
+	panel_container.position = viewport_pos - Vector2(0, panel_container.size.y + 20) # show above
+	print("open_details_pane")
 
 func close_details_pane():
 	draw_range = false
 	queue_redraw()
-	#Globals.hud.open_details_pane.queue_free()
-	#Globals.hud.open_details_pane = null
 
 func _on_collision_area_input_event(_viewport, _event, _shape_idx):
-	if deployed and Input.is_action_just_pressed("LeftClick"):
-		#if is_instance_valid(Globals.hud.open_details_pane):
-			#if Globals.hud.open_details_pane.turret == self:
-				#close_details_pane()
-				#return
-			#Globals.hud.open_details_pane.turret.close_details_pane()
+	if deployed and Input.is_action_just_pressed("mouse_left_click"):
 		open_details_pane()
 
 func upgrade_turret():
@@ -164,18 +153,9 @@ func _on_color_button_pressed() -> void:
 		current_bullet = Bullet.BLUE
 	elif current_bullet == Bullet.BLUE:
 		current_bullet = Bullet.RED
-	
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("mouse_right_click"):
-		print("mouse_right_click")
-		canvas_layer.visible = true
-		#var camera = get_viewport().get_camera_2d()
-		var viewport_pos = position
-		panel_container.position = viewport_pos - Vector2(0, panel_container.size.y + 20) # show above
-	elif canvas_layer.visible and (event is InputEventMouseButton) and event.pressed:
-		# Convert mouse position to popup-local coordinates
+	if canvas_layer.visible and (event is InputEventMouseButton) and event.pressed:
 		var local_pos = panel_container.get_local_mouse_position()
-		
-		# Check if click is outside popup rect
 		if local_pos.x < 0 or local_pos.y < 0 or local_pos.x > panel_container.size.x or local_pos.y > panel_container.size.y:
 			canvas_layer.visible = false
