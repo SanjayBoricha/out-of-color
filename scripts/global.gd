@@ -1,4 +1,3 @@
-class_name Globals
 extends Node
 
 enum EnemyTypes {
@@ -7,16 +6,7 @@ enum EnemyTypes {
 	SQUARE,
 }
 
-@warning_ignore("unused_signal")
-signal goldChanged(newGold)
-@warning_ignore("unused_signal")
-signal baseHpChanged(newHp, maxHp)
-@warning_ignore("unused_signal")
-signal waveStarted(wave_count, enemy_count)
-@warning_ignore("unused_signal")
-signal waveCleared(wait_time)
-@warning_ignore("unused_signal")
-signal enemyDestroyed(remain)
+signal wave_start(wave)
 
 var selected_map := ""
 var mainNode : Node2D
@@ -25,6 +15,13 @@ var projectilesNode : Node2D
 var currentMap : Node2D
 var hud : Control
 
+var wave_count: Node = null
+
+func _ready() -> void:
+	wave_start.connect(on_wave_start)
+
+func on_wave_start(wave) -> void:
+	wave_count.text = "Wave: " + str(wave)
 
 func restart_current_level():
 	var currentLevelScene := load(currentMap.scene_file_path)

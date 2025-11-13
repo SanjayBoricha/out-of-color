@@ -59,7 +59,7 @@ func _process(_delta):
 	elif rotates:
 		@warning_ignore("standalone_ternary")
 		#print("current_target")
-		sprite_2d.look_at(current_target.position) if is_instance_valid(current_target) else try_get_closest_target()
+		#sprite_2d.look_at(current_target.position) if is_instance_valid(current_target) else try_get_closest_target()
 		
 	if current_bullet != last_bullet:
 		color_button.texture_normal = bullets[current_bullet]

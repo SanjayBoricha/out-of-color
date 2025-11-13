@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://c68x8t5pb6r47"]
 
-[ext_resource type="Texture2D" uid="uid://d00675vjqsi7l" path="res://assets/weapons/gun.png" id="1_fypso"]
 [ext_resource type="Script" uid="uid://djafky1a5rapm" path="res://scenes/weapons/tank.gd" id="1_mbqws"]
+[ext_resource type="Texture2D" uid="uid://con2eydohxiba" path="res://assets/weapons/turret.png" id="2_3a5d7"]
 [ext_resource type="Texture2D" uid="uid://bc7k1ta5olpu2" path="res://assets/weapons/bullets/red_bullet.png" id="3_3a5d7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3a5d7"]
-radius = 39.52847
+radius = 27.504545
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mbqws"]
 radius = 104.75209
@@ -15,8 +15,9 @@ script = ExtResource("1_mbqws")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(3, 2.4)
-texture = ExtResource("1_fypso")
+position = Vector2(3.8146973e-06, 1)
+scale = Vector2(0.06, 0.056)
+texture = ExtResource("2_3a5d7")
 offset = Vector2(7.6000004, 0)
 
 [node name="CollisionArea" type="Area2D" parent="."]

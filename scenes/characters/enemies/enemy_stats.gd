@@ -2,13 +2,15 @@ extends Resource
 class_name EnemyStats
 
 @export var name: String
-@export var type: Globals.EnemyTypes
+@export var type: Global.EnemyTypes
 @export var speed: float
 @export var hp: int
 
 func get_sprite_texture():
 	match type:
-		Globals.EnemyTypes.CIRCLE:
+		Global.EnemyTypes.CIRCLE:
 			return load("res://assets/characters/slime.png")
-		Globals.EnemyTypes.TRIANGLE:
+		Global.EnemyTypes.TRIANGLE:
 			return load("res://assets/characters/triangle.png")
+		Global.EnemyTypes.SQUARE:
+			return load("res://assets/characters/square.png")

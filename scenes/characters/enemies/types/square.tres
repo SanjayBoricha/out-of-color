@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://d4fndf3lx777t"]
+
+[ext_resource type="Script" uid="uid://ycfhhe7x05o4" path="res://scenes/characters/enemies/enemy_stats.gd" id="1_t65cn"]
+
+[resource]
+script = ExtResource("1_t65cn")
+name = "Block"
+type = 2
+speed = 75.0
+hp = 4
+metadata/_custom_type_script = "uid://ycfhhe7x05o4"

@@ -1,37 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://whi5t1pok5d"]
+[gd_scene load_steps=4 format=3 uid="uid://whi5t1pok5d"]
 
 [ext_resource type="PackedScene" uid="uid://dppm63cfggjih" path="res://scenes/maps/grass/grass_map.tscn" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://ctyrpp34qa3gf" path="res://scenes/main/main.gd" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://d1q5vk15gaqb7" path="res://scenes/main/hud.gd" id="3_k2fmo"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_iuonh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 323)
+
+[node name="GrassMap" parent="." instance=ExtResource("1_hyk8p")]
+position = Vector2(-2, -3)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 44.0
+grow_horizontal = 2
+script = ExtResource("3_k2fmo")
+
+[node name="Panel" type="Panel" parent="UI/HUD"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 585.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TurretsPanel" type="PanelContainer" parent="UI/HUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Panel"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 44.0
+offset_right = -44.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
-[node name="Turrets" type="HBoxContainer" parent="UI/HUD/TurretsPanel"]
+[node name="WaveCount" type="Label" parent="UI/HUD/Panel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="TurretBuyContainer" type="PanelContainer" parent="UI/HUD/TurretsPanel/Turrets"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="GrassMap" parent="." instance=ExtResource("1_hyk8p")]
+text = "Wave: 1"
