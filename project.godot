@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://sn8geexaf8h0"
+
 [file_customization]
 
 folder_colors={
@@ -27,6 +33,10 @@ folder_colors={
 "res://scenes/": "red",
 "res://scripts/": "orange"
 }
+
+[gui]
+
+theme/custom_font="uid://btq1472ysmbru"
 
 [input]
 
