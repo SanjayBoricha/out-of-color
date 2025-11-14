@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_3cvik")
+name = "Mage"
 type = 1
 speed = 125.0
 hp = 3

@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cktyjo3bugcbw" path="res://scenes/maps/base_map.tres" id="1_vguoc"]
 [ext_resource type="Script" uid="uid://bxdms6npbhanr" path="res://scenes/maps/grass/enemy_base.gd" id="3_k2tbn"]
-[ext_resource type="PackedScene" uid="uid://c68x8t5pb6r47" path="res://scenes/weapons/tank.tscn" id="3_x16ei"]
+[ext_resource type="PackedScene" uid="uid://tftsjbuq8l2v" path="res://scenes/maps/components/turret_placement.tscn" id="5_k2tbn"]
 [ext_resource type="PackedScene" uid="uid://dfo3ci5kdbj4" path="res://scenes/characters/king.tscn" id="6_74ua6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkkl7"]
@@ -32,11 +32,6 @@ tile_set = ExtResource("1_vguoc")
 position = Vector2(-142.5, 353.5)
 shape = SubResource("RectangleShape2D_vkkl7")
 
-[node name="Tanks" type="Node2D" parent="."]
-
-[node name="Tank" parent="Tanks" instance=ExtResource("3_x16ei")]
-position = Vector2(526, 253)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_mpvby")
 
@@ -58,6 +53,32 @@ wait_time = 10.0
 unique_name_in_owner = true
 position = Vector2(1334, 308)
 shape = SubResource("CircleShape2D_k2tbn")
+
+[node name="TurretPlacements" type="Node2D" parent="."]
+
+[node name="TurretPlacement" parent="TurretPlacements" instance=ExtResource("5_k2tbn")]
+offset_left = 192.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 512.0
+
+[node name="TurretPlacement2" parent="TurretPlacements" instance=ExtResource("5_k2tbn")]
+offset_left = 432.0
+offset_top = 224.0
+offset_right = 560.0
+offset_bottom = 352.0
+
+[node name="TurretPlacement3" parent="TurretPlacements" instance=ExtResource("5_k2tbn")]
+offset_left = 672.0
+offset_top = 248.0
+offset_right = 800.0
+offset_bottom = 376.0
+
+[node name="TurretPlacement4" parent="TurretPlacements" instance=ExtResource("5_k2tbn")]
+offset_left = 880.00006
+offset_top = 472.0
+offset_right = 1008.00006
+offset_bottom = 600.0
 
 [connection signal="timeout" from="EnemyBase/WaveTimer" to="EnemyBase" method="start_wave"]
 [connection signal="timeout" from="EnemyBase/EnemyTimer" to="EnemyBase" method="spawn_enemy"]

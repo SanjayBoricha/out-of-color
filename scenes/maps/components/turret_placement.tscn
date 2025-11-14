@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://tftsjbuq8l2v"]
+
+[ext_resource type="Texture2D" uid="uid://bgylb6e8m23nm" path="res://icon.svg" id="1_tok0d"]
+[ext_resource type="Script" uid="uid://cxxin0tfikby6" path="res://scenes/maps/components/turret_placement.gd" id="2_0da36"]
+
+[node name="TurretPlacement" type="TextureButton"]
+anchors_preset = -1
+anchor_top = -0.059000004
+anchor_right = 0.033
+offset_top = 0.23200226
+offset_right = 89.984
+offset_bottom = 90.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("1_tok0d")
+stretch_mode = 0
+script = ExtResource("2_0da36")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

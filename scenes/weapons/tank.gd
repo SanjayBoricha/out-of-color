@@ -142,6 +142,9 @@ func attack():
 		bullet.position = position
 		bullet.target = current_target
 		get_parent().add_child(bullet)
+		#apply_scale(Vector2(1.1, 1.1))
+		#await get_tree().create_timer(0.3).timeout
+		#apply_scale(Vector2(1.0, 1.0))
 	else:
 		try_get_closest_target()
 

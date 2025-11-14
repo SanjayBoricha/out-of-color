@@ -17,6 +17,7 @@ func _ready() -> void:
 	hurt_component.hurt.connect(on_hurt)
 	damage_component.max_damage_reached.connect(on_max_damage_reached)
 	sprite_2d.texture = stats.get_sprite_texture()
+	damage_component.max_damage = stats.hp
 
 func _physics_process(delta: float) -> void:
 	if !$NavigationAgent2D.is_target_reached():
