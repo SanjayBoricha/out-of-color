@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxgkcb57tgd6v"]
+[gd_scene load_steps=13 format=3 uid="uid://smvj3vn74sy"]
 
-[ext_resource type="Texture2D" uid="uid://xradlnaajtqp" path="res://assets/images/menu/bg.png" id="1_qpju2"]
+[ext_resource type="Texture2D" uid="uid://47in18t5w6a6" path="res://assets/images/menu/bg.png" id="1_qpju2"]
+[ext_resource type="Script" uid="uid://du65ofgmyqkxe" path="res://scenes/menus/main/india.gd" id="2_qiond"]
+[ext_resource type="AudioStream" uid="uid://bv3qwkioh6o5n" path="res://assets/music/bg_music.ogg" id="2_uxumf"]
+[ext_resource type="Script" uid="uid://cy565bet6hffg" path="res://scenes/menus/main/us.gd" id="4_bv6an"]
+[ext_resource type="Script" uid="uid://bgjx4nvy568c3" path="res://scenes/menus/main/europe.gd" id="5_bep8a"]
+[ext_resource type="Texture2D" uid="uid://bnubhlfvony2u" path="res://assets/images/ui/ui_sheet_white.png" id="6_amjff"]
+[ext_resource type="Script" uid="uid://dohl54jo2lius" path="res://scenes/menus/main/volume.gd" id="7_634rf"]
+[ext_resource type="Script" uid="uid://cgl7rc26d4tu" path="res://scenes/menus/main/sfx.gd" id="8_n5o1u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7geb"]
+atlas = ExtResource("6_amjff")
+region = Rect2(9, 310, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwmtx"]
+atlas = ExtResource("6_amjff")
+region = Rect2(9, 360, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e21v2"]
+atlas = ExtResource("6_amjff")
+region = Rect2(259, 10, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyvfl"]
+atlas = ExtResource("6_amjff")
+region = Rect2(260, 60, 32, 32)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,34 +32,87 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_uxumf")
+autoplay = true
+bus = &"Music"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Volume" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Volume"
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_x7geb")
+texture_pressed = SubResource("AtlasTexture_qwmtx")
+script = ExtResource("7_634rf")
+
+[node name="SFX" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "SFX"
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_e21v2")
+texture_pressed = SubResource("AtlasTexture_fyvfl")
+script = ExtResource("8_n5o1u")
+
+[node name="Map Container" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Map Container"]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Map Container/CanvasLayer"]
+anchors_preset = -1
+anchor_left = -0.00086805556
+anchor_right = -0.00086805556
+offset_right = 1154.0
+offset_bottom = 647.0
+mouse_filter = 2
 texture = ExtResource("1_qpju2")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 991.0
-offset_top = 252.0
-offset_right = 1150.0
-offset_bottom = 321.0
+[node name="Regions" type="Node2D" parent="Map Container"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-alignment = 1
+[node name="USMap" type="Area2D" parent="Map Container/Regions"]
 
-[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Start Game"
+[node name="US" type="CollisionPolygon2D" parent="Map Container/Regions/USMap"]
+polygon = PackedVector2Array(164, 143, 416, 143, 336, 232, 207, 238)
+script = ExtResource("4_bv6an")
 
-[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Quit"
+[node name="EuropeMap" type="Area2D" parent="Map Container/Regions"]
+
+[node name="Europe" type="CollisionPolygon2D" parent="Map Container/Regions/EuropeMap"]
+polygon = PackedVector2Array(536, 136, 639, 64, 771, 75, 763, 132, 676, 154, 660, 193, 543, 190)
+script = ExtResource("5_bep8a")
+
+[node name="IndiaMap" type="Area2D" parent="Map Container/Regions"]
+
+[node name="India" type="CollisionPolygon2D" parent="Map Container/Regions/IndiaMap"]
+polygon = PackedVector2Array(813, 198, 792, 236, 824, 296, 879, 233)
+script = ExtResource("2_qiond")
+
+[connection signal="toggled" from="MarginContainer/HBoxContainer/Volume" to="MarginContainer/HBoxContainer/Volume" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/SFX" to="MarginContainer/HBoxContainer/SFX" method="_on_toggled"]
+[connection signal="input_event" from="Map Container/Regions/USMap" to="Map Container/Regions/USMap/US" method="_on_us_input_event"]
+[connection signal="mouse_entered" from="Map Container/Regions/USMap" to="Map Container/Regions/USMap/US" method="_on_us_map_mouse_entered"]
+[connection signal="mouse_exited" from="Map Container/Regions/USMap" to="Map Container/Regions/USMap/US" method="_on_us_map_mouse_exited"]
+[connection signal="input_event" from="Map Container/Regions/EuropeMap" to="Map Container/Regions/EuropeMap/Europe" method="_on_europe_input_event"]
+[connection signal="mouse_entered" from="Map Container/Regions/EuropeMap" to="Map Container/Regions/EuropeMap/Europe" method="_on_europe_map_mouse_entered"]
+[connection signal="mouse_exited" from="Map Container/Regions/EuropeMap" to="Map Container/Regions/EuropeMap/Europe" method="_on_europe_map_mouse_exited"]
+[connection signal="input_event" from="Map Container/Regions/IndiaMap" to="Map Container/Regions/IndiaMap/India" method="_on_india_input_event"]
+[connection signal="mouse_entered" from="Map Container/Regions/IndiaMap" to="Map Container/Regions/IndiaMap/India" method="_on_india_map_mouse_entered"]
+[connection signal="mouse_exited" from="Map Container/Regions/IndiaMap" to="Map Container/Regions/IndiaMap/India" method="_on_india_map_mouse_exited"]
