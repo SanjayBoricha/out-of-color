@@ -22,7 +22,6 @@ Global="*res://scripts/global.gd"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://sn8geexaf8h0"
 
 [file_customization]
