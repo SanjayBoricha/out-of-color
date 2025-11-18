@@ -6,5 +6,5 @@
 script = ExtResource("1_1l0bp")
 name = "Slime"
 speed = 100.0
-hp = 2
+hp = 3
 metadata/_custom_type_script = "uid://ycfhhe7x05o4"

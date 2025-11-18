@@ -6,6 +6,18 @@ enum EnemyTypes {
 	SQUARE,
 }
 
+enum BulletType {
+	RED,
+	GREEN,
+	BLUE,
+}
+
+enum StatusEffect {
+	NONE,
+	DOT,
+	FREEZE,
+}
+
 signal wave_start(wave)
 signal points_update(points)
 

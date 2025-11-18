@@ -12,20 +12,23 @@ enum Bullet {
 	BLUE
 }
 
-var bullets = {
+var bulletScene = preload("res://scenes/weapons/bullet/bullet.tscn")
+
+var bullets := {
 	Bullet.RED: load("res://assets/weapons/bullets/red_bullet.png"),
 	Bullet.GREEN: load("res://assets/weapons/bullets/green_bullet.png"),
 	Bullet.BLUE: load("res://assets/weapons/bullets/blue_bullet.png"),
 }
 
-var bulletScenes = {
-	Bullet.RED: preload("res://scenes/weapons/bullets/red_bullet.tscn"),
-	Bullet.GREEN: preload("res://scenes/weapons/bullets/green_bullet.tscn"),
-	Bullet.BLUE: preload("res://scenes/weapons/bullets/blue_bullet.tscn"),
+var bulletStats := {
+	Bullet.RED: load("res://scenes/weapons/bullet/types/single_fireball.tres"),
+	Bullet.GREEN: load("res://scenes/weapons/bullet/types/single_poison.tres"),
+	Bullet.BLUE: load("res://scenes/weapons/bullet/types/single_freeze.tres"),
 }
 
-var current_bullet = Bullet.RED
-var last_bullet = Bullet.RED
+var current_bullet := Bullet.RED
+var current_status_effect := Global.StatusEffect.NONE
+var last_bullet := Bullet.RED
 
 #Deploying
 var deployed := true
@@ -68,7 +71,8 @@ func _draw():
 func _on_detection_area_area_entered(area):
 	if deployed and not current_target:
 		var area_parent = area.get_parent()
-		if area_parent.is_in_group("enemy"):
+		
+		if area_parent is Enemy and (area_parent.damage_component.status_effect == 0 or area_parent.damage_component.status_effect != current_status_effect):
 			current_target = area.get_parent()
 
 func _on_detection_area_area_exited(area):
@@ -114,18 +118,23 @@ func upgrade_turret():
 
 func attack():
 	if is_instance_valid(current_target):
-		#print("fire")
-		var bulletScene: Resource = bulletScenes[current_bullet]
-		var bullet: Node2D = bulletScene.instantiate()
-		bullet.damage = damage
-		bullet.speed = 400
-		bullet.pierce = 1
+		var bulletStats: BulletStats = bulletStats[current_bullet].duplicate()
+		
+		if bulletStats.dot > 0:
+			current_status_effect = Global.StatusEffect.DOT
+		elif bulletStats.freeze:
+			current_status_effect = Global.StatusEffect.FREEZE
+		else:
+			current_status_effect = Global.StatusEffect.NONE
+		
+		var bullet: Bullet = bulletScene.instantiate()
+		bullet.stats = bulletStats
 		bullet.position = position
-		bullet.target = current_target
+		bullet.direction = (current_target.position - position).normalized()
 		get_parent().add_child(bullet)
-		#apply_scale(Vector2(1.1, 1.1))
-		#await get_tree().create_timer(0.3).timeout
-		#apply_scale(Vector2(1.0, 1.0))
+		
+		#if current_status_effect != Global.StatusEffect.NONE:
+		current_target = null
 	else:
 		try_get_closest_target()
 
@@ -137,6 +146,15 @@ func _on_color_button_pressed() -> void:
 		current_bullet = Bullet.BLUE
 	elif current_bullet == Bullet.BLUE:
 		current_bullet = Bullet.RED
+	
+	var current_bullet_stats: BulletStats = bulletStats[current_bullet]
+	
+	if current_bullet_stats.dot > 0:
+		current_status_effect = Global.StatusEffect.DOT
+	elif current_bullet_stats.freeze:
+		current_status_effect = Global.StatusEffect.FREEZE
+	else:
+		current_status_effect = Global.StatusEffect.NONE
 
 func _input(event: InputEvent) -> void:
 	if canvas_layer.visible and (event is InputEventMouseButton) and event.pressed:
