@@ -11,11 +11,13 @@ radius = 8.0
 script = ExtResource("1_8t6s7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_xc2js")
 
 [node name="HitComponent" parent="." instance=ExtResource("2_pjntg")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_8t6s7")
 
 [connection signal="area_entered" from="HitComponent" to="." method="_on_hit_component_area_entered"]

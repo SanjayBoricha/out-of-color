@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BulletStats" load_steps=2 format=3 uid="uid://j7y13t1dkeva"]
+
+[ext_resource type="Script" uid="uid://y5yemfdael4b" path="res://scenes/weapons/bullet/bullet_stats.gd" id="1_l5rao"]
+
+[resource]
+script = ExtResource("1_l5rao")
+name = "AOE Poison"
+type = 1
+speed = 400.0
+aoe = true
+dot = 1
+metadata/_custom_type_script = "uid://y5yemfdael4b"

@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxw2w2ir7y4wg"]
+
+[ext_resource type="Script" uid="uid://djafky1a5rapm" path="res://scenes/weapons/turret.gd" id="1_ch67r"]
+[ext_resource type="Texture2D" uid="uid://d2tstpu5fu1gu" path="res://assets/weapons/single_turret.png" id="2_ch67r"]
+[ext_resource type="Texture2D" uid="uid://bc7k1ta5olpu2" path="res://assets/weapons/bullets/red_bullet.png" id="3_we0nl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3a5d7"]
+radius = 27.504545
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbqws"]
+radius = 104.75209
+
+[sub_resource type="Gradient" id="Gradient_3a5d7"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ks7d5"]
+gradient = SubResource("Gradient_3a5d7")
+fill = 1
+fill_from = Vector2(0.4871795, 0.51282054)
+fill_to = Vector2(0.85470086, 0.11111111)
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_ch67r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(2.025, 1.9335)
+texture = ExtResource("2_ch67r")
+offset = Vector2(-0.19753027, 0.55029774)
+
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("CircleShape2D_3a5d7")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_mbqws")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 192.0
+offset_bottom = 70.0
+pivot_offset = Vector2(5, -1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Basic Turret"
+horizontal_alignment = 1
+
+[node name="BulletSelect" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect"]
+layout_mode = 2
+text = "Bullet Type"
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="ColorButton" type="TextureButton" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 10)
+texture_normal = ExtResource("3_we0nl")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upgrade"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(3.25, 3.25)
+texture = SubResource("GradientTexture2D_ks7d5")
+
+[connection signal="input_event" from="CollisionArea" to="." method="_on_collision_area_input_event"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="attack"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect/Control/ColorButton" to="." method="_on_color_button_pressed"]
