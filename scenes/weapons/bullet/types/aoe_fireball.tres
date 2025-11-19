@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BulletStats" load_steps=2 format=3 uid="uid://cnmxiw6jgbvgr"]
+
+[ext_resource type="Script" uid="uid://y5yemfdael4b" path="res://scenes/weapons/bullet/bullet_stats.gd" id="1_ivny4"]
+
+[resource]
+script = ExtResource("1_ivny4")
+name = "AOE Fireball"
+speed = 400.0
+damage = 3
+aoe = true
+metadata/_custom_type_script = "uid://y5yemfdael4b"

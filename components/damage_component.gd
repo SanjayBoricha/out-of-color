@@ -41,7 +41,6 @@ func apply_dot(damage_per_tick: int, duration: float):
 	get_tree().create_timer(duration).connect("timeout", _stop_dot)
 
 func _apply_dot() -> void:
-	print("_apply_dot")
 	if status_effect == Global.StatusEffect.DOT:
 		apply_damage(dot_damage)
 

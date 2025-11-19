@@ -13,9 +13,17 @@ func _ready() -> void:
 	hit_component.hit_damage = stats.damage
 	hit_component.dot = stats.dot
 	hit_component.freeze = stats.freeze
+	
+	if stats.aoe:
+		await get_tree().create_timer(0.3).timeout
+		queue_free()
 
 func _process(delta: float) -> void:
 	position += direction * stats.speed * delta
+
+func _physics_process(delta: float) -> void:
+	if stats.aoe:
+		scale += delta * Vector2(20, 20)
 
 func _on_hit_component_area_entered(area: Area2D) -> void:
 	if stats.aoe == false:

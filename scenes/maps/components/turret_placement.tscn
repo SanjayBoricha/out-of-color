@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://tftsjbuq8l2v"]
+[gd_scene load_steps=12 format=3 uid="uid://tftsjbuq8l2v"]
 
 [ext_resource type="Texture2D" uid="uid://bgylb6e8m23nm" path="res://icon.svg" id="1_tok0d"]
 [ext_resource type="Script" uid="uid://cxxin0tfikby6" path="res://scenes/maps/components/turret_placement.gd" id="2_0da36"]
+[ext_resource type="Texture2D" uid="uid://d2tstpu5fu1gu" path="res://assets/weapons/single_turret.png" id="3_xnp84"]
+[ext_resource type="Texture2D" uid="uid://clb65foxv5hqy" path="res://assets/weapons/aoe_turret.png" id="4_xnp84"]
 
 [sub_resource type="Gradient" id="Gradient_0da36"]
 interpolation_mode = 2
@@ -14,6 +16,21 @@ gradient = SubResource("Gradient_0da36")
 fill = 1
 fill_from = Vector2(0.48290598, 0.491453)
 fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnp84"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udo7p"]
+bg_color = Color(1, 1, 1, 0.33333334)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lweam"]
+bg_color = Color(1, 1, 1, 0.45882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebrek"]
+bg_color = Color(1, 1, 1, 0.33333334)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13p0l"]
+bg_color = Color(1, 1, 1, 0.45882353)
 
 [node name="TurretPlacement" type="TextureButton"]
 anchors_preset = -1
@@ -40,13 +57,47 @@ visible = false
 anchors_preset = -1
 anchor_top = -0.059000004
 anchor_right = 0.032
-offset_left = 78.0
-offset_top = 156.232
-offset_right = 134.136
-offset_bottom = 155.0
+offset_left = 146.0
+offset_top = 149.232
+offset_right = 186.136
+offset_bottom = 148.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xnp84")
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
-text = "Turret 1"
+
+[node name="SingleTargetTurret" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo7p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lweam")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/HBoxContainer/SingleTargetTurret"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xnp84")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MultiTargetTurret" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ebrek")
+theme_override_styles/hover = SubResource("StyleBoxFlat_13p0l")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/HBoxContainer/MultiTargetTurret"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xnp84")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/SingleTargetTurret" to="." method="_on_single_target_turret_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/MultiTargetTurret" to="." method="_on_multi_target_turret_pressed"]
