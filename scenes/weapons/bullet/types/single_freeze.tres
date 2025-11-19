@@ -6,7 +6,7 @@
 script = ExtResource("1_kekn0")
 name = "Single Freeze"
 type = 2
-speed = 800.0
+speed = 900.0
 damage = 0
 freeze = true
 metadata/_custom_type_script = "uid://y5yemfdael4b"

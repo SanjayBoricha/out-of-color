@@ -6,6 +6,6 @@
 script = ExtResource("1_1ep1l")
 name = "Single Poison DoT"
 type = 1
-speed = 800.0
+speed = 900.0
 dot = 1
 metadata/_custom_type_script = "uid://y5yemfdael4b"

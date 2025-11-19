@@ -5,7 +5,7 @@ extends Node2D
 @export var current_damage: int = 0
 
 signal max_damage_reached
-signal clear_status_effect
+signal clear_dot
 
 var status_effect := Global.StatusEffect.NONE
 
@@ -48,4 +48,4 @@ func _apply_dot() -> void:
 func _stop_dot():
 	status_effect = Global.StatusEffect.NONE
 	dot_timer.stop()
-	clear_status_effect.emit()
+	clear_dot.emit()

@@ -10,9 +10,11 @@ class_name Enemy
 
 var agent : NavigationAgent2D
 
-var status_effect := Global.StatusEffect.NONE
+var status_effects := []
 
 func _ready() -> void:
+	add_to_group("enemy")
+	
 	agent = $NavigationAgent2D
 	agent.avoidance_enabled = true
 	
@@ -20,19 +22,18 @@ func _ready() -> void:
 		sprite_2d.material = sprite_2d.material.duplicate()
 	
 	$NavigationAgent2D.target_position = target.global_position
-	add_to_group("enemy")
 	hurt_component.hurt.connect(on_hurt)
 	hurt_component.dot.connect(on_dot)
 	hurt_component.freeze.connect(on_freeze)
 	damage_component.max_damage_reached.connect(on_max_damage_reached)
-	damage_component.clear_status_effect.connect(on_clear_status_effect)
+	damage_component.clear_dot.connect(on_clear_dot)
 	sprite_2d.texture = stats.get_sprite_texture()
 	damage_component.max_damage = stats.hp
 
 func _physics_process(delta: float) -> void:
-	if !$NavigationAgent2D.is_target_reached() and status_effect != Global.StatusEffect.FREEZE:
+	if !$NavigationAgent2D.is_target_reached() :
 		var nav_point_direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-		velocity = nav_point_direction * stats.speed
+		velocity = nav_point_direction * (stats.speed / 4 if status_effects.has(Global.StatusEffect.FREEZE) else stats.speed)
 		keep_spacing()
 		move_and_slide()
 
@@ -41,22 +42,26 @@ func on_hurt(hit_damage: int) -> void:
 
 func on_dot(dpt: int, duration: float) -> void:
 	damage_component.apply_dot(dpt, duration)
-	status_effect = Global.StatusEffect.DOT
+	status_effects.append(Global.StatusEffect.DOT)
 	sprite_2d.material.set_shader_parameter("intensity", 0.6)
 
-func on_freeze() -> void:
-	status_effect = Global.StatusEffect.FREEZE
-
-func on_clear_status_effect() -> void:
-	status_effect = Global.StatusEffect.NONE
+func on_clear_dot() -> void:
+	status_effects.remove_at(status_effects.bsearch(Global.StatusEffect.DOT))
 	sprite_2d.material.set_shader_parameter("intensity", 0.0)
+
+func on_freeze() -> void:
+	#print("on_freeze")
+	status_effects.append(Global.StatusEffect.FREEZE)
+
+func on_unfreeze() -> void:
+	status_effects.remove_at(status_effects.bsearch(Global.StatusEffect.FREEZE))
 
 func on_max_damage_reached() -> void:
 	Global.add_to_points(stats.hp)
 	queue_free()
 
 func keep_spacing():
-	var others = get_tree().get_nodes_in_group("enemies")
+	var others = get_tree().get_nodes_in_group("enemy")
 
 	for e in others:
 		if e == self:

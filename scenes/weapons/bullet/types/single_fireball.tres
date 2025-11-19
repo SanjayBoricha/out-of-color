@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_cordf")
 name = "Single Fireball"
-speed = 800.0
+speed = 900.0
 damage = 2
 aoe = null
 dot = null

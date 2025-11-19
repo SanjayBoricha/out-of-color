@@ -7,5 +7,5 @@ script = ExtResource("1_t65cn")
 name = "Block"
 type = 2
 speed = 80.0
-hp = 14
+hp = 12
 metadata/_custom_type_script = "uid://ycfhhe7x05o4"

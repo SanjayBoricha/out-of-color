@@ -33,4 +33,20 @@ position = Vector2(63.333344, 63.333324)
 scale = Vector2(1.9791664, 1.9791666)
 texture = SubResource("GradientTexture2D_hnin1")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = -0.059000004
+anchor_right = 0.032
+offset_left = 78.0
+offset_top = 156.232
+offset_right = 134.136
+offset_bottom = 155.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+text = "Turret 1"
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
