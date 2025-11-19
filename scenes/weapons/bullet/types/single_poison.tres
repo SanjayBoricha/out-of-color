@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BulletStats" load_steps=2 format=3 uid="uid://cr742iddfmsvh"]
+
+[ext_resource type="Script" uid="uid://y5yemfdael4b" path="res://scenes/weapons/bullet/bullet_stats.gd" id="1_1ep1l"]
+
+[resource]
+script = ExtResource("1_1ep1l")
+name = "Single Poison DoT"
+type = 1
+speed = 900.0
+dot = 1
+metadata/_custom_type_script = "uid://y5yemfdael4b"

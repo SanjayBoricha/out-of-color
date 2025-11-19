@@ -1,6 +1,8 @@
 extends TextureButton
 
 @onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var panel_container: PanelContainer = $CanvasLayer/PanelContainer
 
 var turret = preload("res://scenes/weapons/tank.tscn")
 

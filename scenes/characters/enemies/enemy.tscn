@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsrswrgdj3aa0"]
+[gd_scene load_steps=9 format=3 uid="uid://bsrswrgdj3aa0"]
 
 [ext_resource type="Script" uid="uid://dijxpexfddkxj" path="res://scenes/characters/enemies/enemy.gd" id="1_blu3w"]
 [ext_resource type="Texture2D" uid="uid://i5b2j6yygcj6" path="res://assets/characters/slime.png" id="2_blu3w"]
+[ext_resource type="Shader" uid="uid://cyvtk80ohvvms" path="res://scenes/characters/enemies/poison.gdshader" id="2_ihb4b"]
 [ext_resource type="PackedScene" uid="uid://bcinkg8pimvb8" path="res://components/damage_component.tscn" id="3_qj54i"]
 [ext_resource type="PackedScene" uid="uid://b1svmn5gj0rxp" path="res://components/hurt_component.tscn" id="4_ihb4b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksqmq"]
+shader = ExtResource("2_ihb4b")
+shader_parameter/intensity = 0.0
+shader_parameter/poison_color = Color(0.2, 1, 0.2, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w0ky3"]
 radius = 5.0
@@ -16,6 +22,7 @@ collision_layer = 2
 script = ExtResource("1_blu3w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ksqmq")
 position = Vector2(0, -10)
 scale = Vector2(1.75, 1.531)
 texture = ExtResource("2_blu3w")

@@ -46,6 +46,7 @@ script = ExtResource("3_k2tbn")
 wait_time = 10.0
 
 [node name="EnemyTimer" type="Timer" parent="EnemyBase"]
+wait_time = 0.5
 
 [node name="Area2D" type="Area2D" parent="EnemyBase"]
 
