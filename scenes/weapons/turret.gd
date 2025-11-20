@@ -72,7 +72,7 @@ func _on_detection_area_area_entered(area):
 	if deployed and not current_target:
 		var area_parent = area.get_parent()
 		
-		if area_parent is Enemy and (area_parent.damage_component.status_effect == 0 or area_parent.damage_component.status_effect != current_status_effect):
+		if area_parent is Enemy:
 			current_target = area.get_parent()
 
 func _on_detection_area_area_exited(area):
@@ -117,6 +117,8 @@ func upgrade_turret():
 	#turretUpdated.emit()
 
 func attack():
+	try_get_closest_target()
+
 	if is_instance_valid(current_target):
 		var bulletStats: BulletStats = bulletStats[current_bullet].duplicate()
 		
@@ -161,3 +163,18 @@ func _input(event: InputEvent) -> void:
 		var local_pos = panel_container.get_local_mouse_position()
 		if local_pos.x < 0 or local_pos.y < 0 or local_pos.x > panel_container.size.x or local_pos.y > panel_container.size.y:
 			canvas_layer.visible = false
+
+
+var highlight_detection_area = false
+
+func _on_collision_area_mouse_entered() -> void:
+	highlight_detection_area = true
+	$DetectionArea.queue_redraw()
+
+func _on_collision_area_mouse_exited() -> void:
+	highlight_detection_area = false
+	$DetectionArea.queue_redraw()
+
+func _on_detection_area_draw() -> void:
+	if highlight_detection_area:
+		$DetectionArea.draw_circle(Vector2.ZERO, 100, Color("#ff000022"))

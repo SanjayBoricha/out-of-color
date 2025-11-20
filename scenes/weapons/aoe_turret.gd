@@ -59,7 +59,7 @@ func _process(_delta):
 	if current_bullet != last_bullet:
 		color_button.texture_normal = bullets[current_bullet]
 		last_bullet = current_bullet
-
+	
 func _draw():
 	if draw_range:
 		draw_circle(Vector2(0,0), attack_range, "3ccd50a9", false, 1, true)
@@ -113,6 +113,8 @@ func upgrade_turret():
 	#turretUpdated.emit()
 
 func attack():
+	try_get_closest_target()
+
 	if is_instance_valid(current_target):
 		var bulletStats: BulletStats = bulletStats[current_bullet].duplicate()
 		
@@ -157,3 +159,17 @@ func _input(event: InputEvent) -> void:
 		var local_pos = panel_container.get_local_mouse_position()
 		if local_pos.x < 0 or local_pos.y < 0 or local_pos.x > panel_container.size.x or local_pos.y > panel_container.size.y:
 			canvas_layer.visible = false
+
+var highlight_detection_area = false
+
+func _on_collision_area_mouse_entered() -> void:
+	highlight_detection_area = true
+	$DetectionArea.queue_redraw()
+
+func _on_collision_area_mouse_exited() -> void:
+	highlight_detection_area = false
+	$DetectionArea.queue_redraw()
+
+func _on_detection_area_draw() -> void:
+	if highlight_detection_area:
+		$DetectionArea.draw_circle(Vector2.ZERO, 150, Color("#ff000022"))
