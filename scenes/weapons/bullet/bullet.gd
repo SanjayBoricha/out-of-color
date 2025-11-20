@@ -15,7 +15,7 @@ func _ready() -> void:
 	hit_component.freeze = stats.freeze
 	
 	if stats.aoe:
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.4).timeout
 		queue_free()
 
 func _process(delta: float) -> void:
