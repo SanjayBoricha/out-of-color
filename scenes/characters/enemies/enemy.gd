@@ -30,7 +30,7 @@ func _ready() -> void:
 	sprite_2d.texture = stats.get_sprite_texture()
 	damage_component.max_damage = stats.hp
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !$NavigationAgent2D.is_target_reached() :
 		var nav_point_direction = to_local($NavigationAgent2D.get_next_path_position()).normalized()
 		velocity = nav_point_direction * (stats.speed / 4 if status_effects.has(Global.StatusEffect.FREEZE) else stats.speed)
