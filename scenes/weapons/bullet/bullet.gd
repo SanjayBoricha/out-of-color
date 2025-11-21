@@ -17,6 +17,10 @@ func _ready() -> void:
 	if stats.aoe:
 		await get_tree().create_timer(0.4).timeout
 		queue_free()
+	else:
+		$Sprite2D.scale = Vector2(0.75, 0.75)
+		$HitComponent/CollisionShape2D.scale = Vector2(0.75, 0.75)
+
 
 func _process(delta: float) -> void:
 	position += direction * stats.speed * delta
@@ -28,3 +32,7 @@ func _physics_process(delta: float) -> void:
 func _on_hit_component_area_entered(area: Area2D) -> void:
 	if stats.aoe == false:
 		queue_free()
+
+func _on_draw() -> void:
+	if stats.type == Global.BulletType.RED:
+		$Fireball.visible = true

@@ -39,6 +39,7 @@ var draw_range := true
 var rotates := true
 var current_target = null
 
+
 #Stats
 var attack_speed := 1.0:
 	set(value):
@@ -52,7 +53,6 @@ var damage := 1.0
 var turret_level := 1
 
 func _ready() -> void:
-	print("ready")
 	color_button.texture_normal = bullets[Bullet.RED]
 	
 	point_light_2d.visible = Global.is_night
@@ -83,13 +83,15 @@ func _on_detection_area_area_exited(area):
 func try_get_closest_target():
 	if not deployed:
 		return
-	var closest = 1000
+	var closest = 10000
 	var closest_area = null
 	for area in $DetectionArea.get_overlapping_areas():
-		var dist = area.position.distance_to(position)
-		if dist < closest:
-			closest = dist
-			closest_area = area
+		var parent: Enemy = area.get_parent()
+		if parent is Enemy and (parent.damage_component.status_effect == Global.StatusEffect.NONE or parent.damage_component.status_effect != current_status_effect):
+			var dist = area.position.distance_to(position)
+			if dist < closest:
+				closest = dist
+				closest_area = area
 	if closest_area:
 		current_target = closest_area.get_parent()
 
