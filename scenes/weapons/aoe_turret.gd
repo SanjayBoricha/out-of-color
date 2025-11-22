@@ -88,7 +88,7 @@ func try_get_closest_target():
 	var closest = 10000
 	var closest_area = null
 	for area in $DetectionArea.get_overlapping_areas():
-		var parent: Enemy = area.get_parent()
+		var parent = area.get_parent()
 		if parent is Enemy and (parent.damage_component.status_effect == Global.StatusEffect.NONE or parent.damage_component.status_effect != current_status_effect):
 			var dist = area.position.distance_to(position)
 			if dist < closest:
