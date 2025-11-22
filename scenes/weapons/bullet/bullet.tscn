@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://2ekq0bv3foxi"]
+[gd_scene load_steps=12 format=3 uid="uid://2ekq0bv3foxi"]
 
 [ext_resource type="Script" uid="uid://bckma0jqala51" path="res://scenes/weapons/bullet/bullet.gd" id="1_8t6s7"]
 [ext_resource type="Texture2D" uid="uid://bc7k1ta5olpu2" path="res://assets/weapons/bullets/red_bullet.png" id="1_xc2js"]
 [ext_resource type="PackedScene" uid="uid://cuvmt3bdpugd0" path="res://components/hit_component.tscn" id="2_pjntg"]
+[ext_resource type="AudioStream" uid="uid://cw2sllpk37glh" path="res://assets/sounds/normal_bullet_fire.ogg" id="3_v8mmc"]
 [ext_resource type="Texture2D" uid="uid://cwn6bue1cv6d7" path="res://assets/weapons/bullets/nova.png" id="4_5prnu"]
+[ext_resource type="AudioStream" uid="uid://daayig2b2sbbh" path="res://assets/sounds/aoe_bullet_fire.ogg" id="4_h2usb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8t6s7"]
 radius = 8.0
@@ -35,6 +37,14 @@ script = ExtResource("1_8t6s7")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_xc2js")
+
+[node name="NormalBulletFireSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v8mmc")
+bus = &"SFX"
+
+[node name="AoeBulletFireSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_h2usb")
+bus = &"SFX"
 
 [node name="HitComponent" parent="." instance=ExtResource("2_pjntg")]
 

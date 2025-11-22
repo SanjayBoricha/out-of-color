@@ -1,8 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxw2w2ir7y4wg"]
+[gd_scene load_steps=14 format=3 uid="uid://dxw2w2ir7y4wg"]
 
 [ext_resource type="Script" uid="uid://djafky1a5rapm" path="res://scenes/weapons/turret.gd" id="1_ch67r"]
+[ext_resource type="AudioStream" uid="uid://d16e4nmpmejhm" path="res://assets/sounds/mouse_click.ogg" id="2_538jk"]
 [ext_resource type="Texture2D" uid="uid://d2tstpu5fu1gu" path="res://assets/weapons/single_turret.png" id="2_ch67r"]
+[ext_resource type="AudioStream" uid="uid://cucpdagydmbvo" path="res://assets/sounds/turrent_building.ogg" id="3_83w2q"]
+[ext_resource type="AudioStream" uid="uid://chlm28avpyyba" path="res://assets/sounds/mouse_hover.ogg" id="3_487ac"]
 [ext_resource type="Texture2D" uid="uid://bc7k1ta5olpu2" path="res://assets/weapons/bullets/red_bullet.png" id="3_we0nl"]
+[ext_resource type="ButtonGroup" uid="uid://ml10hbm071e" path="res://scenes/weapons/bullet_selection.tres" id="7_afr54"]
+[ext_resource type="Texture2D" uid="uid://td7gfb0mpirk" path="res://assets/weapons/bullets/blue_bullet.png" id="8_7ejf5"]
+[ext_resource type="Texture2D" uid="uid://molcwv6vnkkd" path="res://assets/weapons/bullets/green_bullet.png" id="9_c5v22"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3a5d7"]
 radius = 27.504545
@@ -22,6 +28,19 @@ fill_to = Vector2(0.85470086, 0.11111111)
 
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_ch67r")
+button_group = ExtResource("7_afr54")
+
+[node name="MouseClickSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_538jk")
+bus = &"SFX"
+
+[node name="MouseHoverSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_487ac")
+bus = &"SFX"
+
+[node name="TurrentBuildingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_83w2q")
+bus = &"SFX"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -48,66 +67,79 @@ shape = SubResource("CircleShape2D_mbqws")
 wait_time = 0.5
 autostart = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 192.0
-offset_bottom = 70.0
-pivot_offset = Vector2(5, -1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Basic Turret"
-horizontal_alignment = 1
-
-[node name="BulletSelect" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect"]
-layout_mode = 2
-text = "Bullet Type"
-
-[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="ColorButton" type="TextureButton" parent="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect/Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 2.0
-offset_right = -3.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(9, 10)
-texture_normal = ExtResource("3_we0nl")
-stretch_mode = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Upgrade"
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
 scale = Vector2(3.25, 3.25)
 texture = SubResource("GradientTexture2D_ks7d5")
+
+[node name="TurretDetails" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -72.0
+offset_right = 158.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="TurretDetails"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TurretDetails/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TurretDetails/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TurretDetails/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Bullet Type"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TurretDetails/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="red" type="TextureButton" parent="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Deals fire damage over time"
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("7_afr54")
+texture_normal = ExtResource("3_we0nl")
+stretch_mode = 0
+
+[node name="blue" type="TextureButton" parent="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Slows enemies"
+toggle_mode = true
+button_group = ExtResource("7_afr54")
+texture_normal = ExtResource("8_7ejf5")
+stretch_mode = 0
+
+[node name="green" type="TextureButton" parent="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Deals poison damage over time"
+toggle_mode = true
+button_group = ExtResource("7_afr54")
+texture_normal = ExtResource("9_c5v22")
+stretch_mode = 0
 
 [connection signal="input_event" from="CollisionArea" to="." method="_on_collision_area_input_event"]
 [connection signal="mouse_entered" from="CollisionArea" to="." method="_on_collision_area_mouse_entered"]
@@ -116,4 +148,12 @@ texture = SubResource("GradientTexture2D_ks7d5")
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
 [connection signal="draw" from="DetectionArea" to="." method="_on_detection_area_draw"]
 [connection signal="timeout" from="AttackCooldown" to="." method="attack"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/BulletSelect/Control/ColorButton" to="." method="_on_color_button_pressed"]
+[connection signal="mouse_entered" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/red" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/red" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/red" to="." method="_on_color_button_pressed"]
+[connection signal="mouse_entered" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/blue" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/blue" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/blue" to="." method="_on_color_button_pressed"]
+[connection signal="mouse_entered" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/green" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/green" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="TurretDetails/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/green" to="." method="_on_color_button_pressed"]

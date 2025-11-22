@@ -21,9 +21,10 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 44.0
 grow_horizontal = 2
+mouse_filter = 2
 script = ExtResource("3_k2fmo")
 
-[node name="Panel" type="Panel" parent="UI/HUD"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/HUD"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,27 +32,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 44.0
-offset_right = -44.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
+[node name="Panel" type="MarginContainer" parent="UI/HUD/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 
-[node name="WaveCount" type="Label" parent="UI/HUD/Panel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/PanelContainer/Panel"]
+layout_mode = 2
+
+[node name="WaveCount" type="Label" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 2
 text = "Wave: 1"
 
-[node name="PointCount" type="Label" parent="UI/HUD/Panel/HBoxContainer"]
+[node name="PointCount" type="Label" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 10
 text = "Points: 0"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
-color = Color(0.24948102, 0.20811182, 0.48152888, 1)
+color = Color(0.2509804, 0.20784314, 0.48235294, 0.57254905)

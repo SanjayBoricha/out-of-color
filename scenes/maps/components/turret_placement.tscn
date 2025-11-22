@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://tftsjbuq8l2v"]
+[gd_scene load_steps=13 format=3 uid="uid://tftsjbuq8l2v"]
 
-[ext_resource type="Texture2D" uid="uid://bgylb6e8m23nm" path="res://icon.svg" id="1_tok0d"]
+[ext_resource type="Texture2D" uid="uid://dm72v3t6hkb2j" path="res://assets/weapons/turrent_placement.png" id="1_xnp84"]
 [ext_resource type="Script" uid="uid://cxxin0tfikby6" path="res://scenes/maps/components/turret_placement.gd" id="2_0da36"]
+[ext_resource type="AudioStream" uid="uid://d16e4nmpmejhm" path="res://assets/sounds/mouse_click.ogg" id="3_ebrek"]
 [ext_resource type="Texture2D" uid="uid://d2tstpu5fu1gu" path="res://assets/weapons/single_turret.png" id="3_xnp84"]
+[ext_resource type="AudioStream" uid="uid://chlm28avpyyba" path="res://assets/sounds/mouse_hover.ogg" id="4_lweam"]
 [ext_resource type="Texture2D" uid="uid://clb65foxv5hqy" path="res://assets/weapons/aoe_turret.png" id="4_xnp84"]
 
 [sub_resource type="Gradient" id="Gradient_0da36"]
@@ -13,66 +15,94 @@ colors = PackedColorArray(1, 1, 1, 1, 0.98005366, 0.98005384, 0.9800536, 1, 0, 0
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hnin1"]
 gradient = SubResource("Gradient_0da36")
+width = 128
+height = 128
 fill = 1
 fill_from = Vector2(0.48290598, 0.491453)
 fill_to = Vector2(0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnp84"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udo7p"]
-bg_color = Color(1, 1, 1, 0.33333334)
+bg_color = Color(0, 0, 0, 0.33333334)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lweam"]
-bg_color = Color(1, 1, 1, 0.45882353)
+bg_color = Color(0, 0, 0, 0.45882353)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebrek"]
-bg_color = Color(1, 1, 1, 0.33333334)
+bg_color = Color(0, 0, 0, 0.333)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13p0l"]
-bg_color = Color(1, 1, 1, 0.45882353)
+bg_color = Color(0, 0, 0, 0.45882353)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="TurretPlacement" type="TextureButton"]
-anchors_preset = -1
-anchor_top = -0.059000004
-anchor_right = 0.033
-offset_top = 0.23200226
-offset_right = 89.984
-offset_bottom = 90.0
+offset_right = 128.0
+offset_bottom = 128.0
 scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("1_tok0d")
+texture_normal = ExtResource("1_xnp84")
 stretch_mode = 0
 script = ExtResource("2_0da36")
 
+[node name="MouseClickSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ebrek")
+bus = &"SFX"
+
+[node name="MouseHoverSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lweam")
+bus = &"SFX"
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
-position = Vector2(63.333344, 63.333324)
-scale = Vector2(1.9791664, 1.9791666)
+position = Vector2(67.33333, 64)
+scale = Vector2(1.2, 1.2)
 texture = SubResource("GradientTexture2D_hnin1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="TurrentMenu" type="Control" parent="."]
 visible = false
+custom_minimum_size = Vector2(256, 128)
+anchors_preset = 0
+offset_left = -64.0
+offset_top = -140.0
+offset_right = 192.0
+offset_bottom = -12.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_top = -0.059000004
-anchor_right = 0.032
-offset_left = 146.0
-offset_top = 149.232
-offset_right = 186.136
-offset_bottom = 148.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_xnp84")
+[node name="MarginContainer" type="MarginContainer" parent="TurrentMenu"]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer"]
+[node name="TurrentContainer" type="HBoxContainer" parent="TurrentMenu/MarginContainer"]
+custom_minimum_size = Vector2(256, 128)
 layout_mode = 2
 
-[node name="SingleTargetTurret" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+[node name="SingleTargetTurret" type="Button" parent="TurrentMenu/MarginContainer/TurrentContainer"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Normal Turrent"
 theme_override_styles/normal = SubResource("StyleBoxFlat_udo7p")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lweam")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/HBoxContainer/SingleTargetTurret"]
+[node name="TextureRect" type="TextureRect" parent="TurrentMenu/MarginContainer/TurrentContainer/SingleTargetTurret"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,16 +110,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_xnp84")
-expand_mode = 1
-stretch_mode = 4
 
-[node name="MultiTargetTurret" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+[node name="MultiTargetTurret" type="Button" parent="TurrentMenu/MarginContainer/TurrentContainer"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-size_flags_horizontal = 3
+tooltip_text = "Bomb Turrent"
 theme_override_styles/normal = SubResource("StyleBoxFlat_ebrek")
 theme_override_styles/hover = SubResource("StyleBoxFlat_13p0l")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/HBoxContainer/MultiTargetTurret"]
+[node name="TextureRect" type="TextureRect" parent="TurrentMenu/MarginContainer/TurrentContainer/MultiTargetTurret"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,6 +128,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_xnp84")
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/SingleTargetTurret" to="." method="_on_single_target_turret_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/MultiTargetTurret" to="." method="_on_multi_target_turret_pressed"]
+[connection signal="pressed" from="TurrentMenu/MarginContainer/TurrentContainer/SingleTargetTurret" to="." method="_on_single_target_turret_pressed"]
+[connection signal="pressed" from="TurrentMenu/MarginContainer/TurrentContainer/MultiTargetTurret" to="." method="_on_multi_target_turret_pressed"]
