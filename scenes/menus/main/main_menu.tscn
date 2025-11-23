@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://smvj3vn74sy"]
+[gd_scene load_steps=19 format=3 uid="uid://smvj3vn74sy"]
 
 [ext_resource type="Texture2D" uid="uid://47in18t5w6a6" path="res://assets/images/menu/bg.png" id="1_qpju2"]
 [ext_resource type="Script" uid="uid://8nlrquxkdgqs" path="res://scenes/menus/main/main_menu.gd" id="1_wrc37"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://01fj7l04alk2" path="res://assets/images/ui/panel_background.png" id="12_odbn6"]
 [ext_resource type="Texture2D" uid="uid://710kpaj8yk7g" path="res://assets/images/ui/button_rectangle_depth.png" id="13_qa2qn"]
 [ext_resource type="Texture2D" uid="uid://tunph3qoduc1" path="res://assets/images/ui/button_rectangle.png" id="14_wrc37"]
-[ext_resource type="Script" uid="uid://b35fr4m4taos2" path="res://scenes/menus/main/start_game.gd" id="15_wrc37"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amjff"]
 atlas = ExtResource("6_amjff")
@@ -57,6 +56,7 @@ script = ExtResource("1_wrc37")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_uxumf")
+autoplay = true
 bus = &"Music"
 
 [node name="MouseHoverSFX" type="AudioStreamPlayer2D" parent="."]
@@ -192,6 +192,19 @@ texture = SubResource("AtlasTexture_634rf")
 [node name="Europe" type="CollisionPolygon2D" parent="Map Container/Regions/EuropeMap"]
 polygon = PackedVector2Array(536, 136, 639, 64, 771, 75, 763, 132, 676, 154, 660, 193, 543, 190)
 
+[node name="AfricaMap" type="Area2D" parent="Map Container/Regions"]
+
+[node name="Icon" type="Sprite2D" parent="Map Container/Regions/AfricaMap"]
+self_modulate = Color(1, 1, 1, 0.7058824)
+texture_filter = 1
+position = Vector2(656, 309)
+scale = Vector2(0.538036, 0.5088973)
+texture = SubResource("AtlasTexture_634rf")
+
+[node name="Africa" type="CollisionPolygon2D" parent="Map Container/Regions/AfricaMap"]
+position = Vector2(8, 181)
+polygon = PackedVector2Array(589, 126, 538, 128, 511, 96, 512, 57, 532, 25, 584, 15, 663, 30, 731, 104, 710, 170, 666, 264, 629, 269, 604, 211)
+
 [node name="IndiaMap" type="Area2D" parent="Map Container/Regions"]
 
 [node name="Icon" type="Sprite2D" parent="Map Container/Regions/IndiaMap"]
@@ -277,7 +290,6 @@ size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_m0s6y")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
-script = ExtResource("15_wrc37")
 
 [node name="Label" type="Label" parent="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame"]
 layout_mode = 1
@@ -397,7 +409,6 @@ size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_m0s6y")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
-script = ExtResource("15_wrc37")
 
 [node name="Label" type="Label" parent="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame"]
 layout_mode = 1
@@ -427,6 +438,125 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
 
 [node name="Label" type="Label" parent="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -9.0
+offset_right = 33.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.8352941)
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AfricaPopupMenu" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AfricaPopupMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BaseMenuScreen" type="MarginContainer" parent="AfricaPopupMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen"]
+self_modulate = Color(1, 1, 1, 0.78431374)
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 2
+texture = ExtResource("12_odbn6")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Level Info" type="RichTextLabel" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
+text = "Location: Africa
+Time:  ???"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Desc" type="RichTextLabel" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
+theme_override_font_sizes/normal_font_size = 14
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StartGame" type="Button" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_m0s6y")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
+
+[node name="Label" type="Label" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -9.0
+offset_right = 33.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.8352941)
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClosePanel" type="Button" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_m0s6y")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
+
+[node name="Label" type="Label" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -524,7 +654,6 @@ size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_m0s6y")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qa2qn")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4ygvx")
-script = ExtResource("15_wrc37")
 
 [node name="Label" type="Label" parent="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame"]
 layout_mode = 1
@@ -580,30 +709,39 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="MarginContainer/SoundOptions/SFX" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/SoundOptions/SFX" to="." method="_on_mouse_exited"]
 [connection signal="toggled" from="MarginContainer/SoundOptions/SFX" to="." method="_on_sfx_toggled"]
-[connection signal="input_event" from="Map Container/Regions/USMap" to="." method="_on_us_input_event"]
+[connection signal="input_event" from="Map Container/Regions/USMap" to="." method="_on_map_input_event" binds= ["us"]]
 [connection signal="mouse_entered" from="Map Container/Regions/USMap" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Map Container/Regions/USMap" to="." method="_on_mouse_exited"]
-[connection signal="input_event" from="Map Container/Regions/EuropeMap" to="." method="_on_europe_input_event"]
+[connection signal="input_event" from="Map Container/Regions/EuropeMap" to="." method="_on_map_input_event" binds= ["europe"]]
 [connection signal="mouse_entered" from="Map Container/Regions/EuropeMap" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Map Container/Regions/EuropeMap" to="." method="_on_mouse_exited"]
-[connection signal="input_event" from="Map Container/Regions/IndiaMap" to="." method="_on_india_input_event"]
+[connection signal="input_event" from="Map Container/Regions/AfricaMap" to="." method="_on_map_input_event" binds= ["africa"]]
+[connection signal="mouse_entered" from="Map Container/Regions/AfricaMap" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Map Container/Regions/AfricaMap" to="." method="_on_mouse_exited"]
+[connection signal="input_event" from="Map Container/Regions/IndiaMap" to="." method="_on_map_input_event" binds= ["india"]]
 [connection signal="mouse_entered" from="Map Container/Regions/IndiaMap" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Map Container/Regions/IndiaMap" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" method="_on_us_pressed"]
+[connection signal="pressed" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_map" binds= ["us"]]
 [connection signal="mouse_entered" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_close_panel_pressed"]
 [connection signal="mouse_entered" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" method="_on_europe_pressed"]
+[connection signal="pressed" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_map" binds= ["europe"]]
 [connection signal="mouse_entered" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_close_panel_pressed"]
+[connection signal="mouse_entered" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_map" binds= ["africa"]]
+[connection signal="mouse_entered" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_close_panel_pressed"]
 [connection signal="mouse_entered" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" method="_on_india_pressed"]
+[connection signal="pressed" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_map" binds= ["india"]]
 [connection signal="mouse_entered" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ClosePanel" to="." method="_on_close_panel_pressed"]

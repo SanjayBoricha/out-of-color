@@ -73,7 +73,7 @@ func _draw():
 func _on_detection_area_area_entered(area):
 	if deployed and not current_target:
 		var area_parent = area.get_parent()
-		
+
 		if area_parent is Enemy and (area_parent.damage_component.status_effect == 0 or area_parent.damage_component.status_effect != current_status_effect):
 			current_target = area.get_parent()
 

@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Out of Color"
-run/main_scene="uid://whi5t1pok5d"
+run/main_scene="uid://smvj3vn74sy"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://scripts/global.gd"
+SceneTransition="*res://scenes/scene_transition.tscn"
 
 [display]
 

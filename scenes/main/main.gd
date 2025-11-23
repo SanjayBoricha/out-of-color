@@ -9,14 +9,17 @@ extends Node2D
 func _ready() -> void:
 	Global.main_node = self
 	canvas_modulate.visible = Global.is_night
-	
+
+	var level: PackedScene = null
+	if Global.current_map in Global.map_keys.keys():
+		level = Global.maps[Global.current_map]
+		add_child(level.instantiate())
+
 	Global.max_enemies_entered.connect(_on_max_enemies_entered)
-	
 	restart_button.pressed.connect(_restart_game)
 	quit_button.pressed.connect(_quit_game)
 
 func _draw() -> void:
-	get_tree().paused = false
 	Global.use_points(Global.current_points)
 	Global.add_to_points(35)
 

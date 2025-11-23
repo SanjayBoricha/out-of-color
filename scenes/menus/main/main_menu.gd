@@ -11,19 +11,23 @@ var sfx_audio_bus_id: int
 @onready var india_popup_menu: MarginContainer = $IndiaPopupMenu
 @onready var us_popup_menu: MarginContainer = $UsPopupMenu
 @onready var europe_popup_menu: MarginContainer = $EuropePopupMenu
+@onready var africa_popup_menu: MarginContainer = $AfricaPopupMenu
 
 func open_popup(country) -> void:
 	match country:
-		"us":
+		Global.map_keys["us"]:
 			us_popup_menu.visible = true
-		"europe":
+		Global.map_keys["europe"]:
 			europe_popup_menu.visible = true
-		"india":
+		Global.map_keys["africa"]:
+			africa_popup_menu.visible = true
+		Global.map_keys["india"]:
 			india_popup_menu.visible = true
 
 func close_all_popup() -> void:
 	us_popup_menu.visible = false
 	europe_popup_menu.visible = false
+	africa_popup_menu.visible = false
 	india_popup_menu.visible = false
 
 # Called when the node enters the scene tree for the first time.
@@ -44,26 +48,19 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	Input.set_custom_mouse_cursor(cursor)
 
-func _on_us_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _on_map_input_event(_viewport: Node, event: InputEvent, _shape_idx: int, country: String) -> void:
 	if event.is_action_pressed("mouse_left_click"):
 		close_all_popup()
 		click_sfx.play()
-		open_popup("us")
-	pass
-
-func _on_europe_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("mouse_left_click"):
-		close_all_popup()
-		click_sfx.play()
-		open_popup("europe")
-	pass
-
-func _on_india_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("mouse_left_click"):
-		close_all_popup()
-		click_sfx.play()
-		open_popup("india")
-	pass
+		match country:
+			Global.map_keys["us"]:
+				open_popup(Global.map_keys["us"])
+			Global.map_keys["europe"]:
+				open_popup(Global.map_keys["europe"])
+			Global.map_keys["africa"]:
+				open_popup(Global.map_keys["africa"])
+			Global.map_keys["india"]:
+				open_popup(Global.map_keys["india"])
 
 func _on_music_toggled(toggled_on: bool) -> void:
 	click_sfx.play()
@@ -78,6 +75,18 @@ func _on_sfx_toggled(toggled_on: bool) -> void:
 		AudioServer.set_bus_volume_db(sfx_audio_bus_id, linear_to_db(0.0))
 	else:
 		AudioServer.set_bus_volume_db(sfx_audio_bus_id, linear_to_db(1.0))
+
+func _on_start_map(country: String):
+	match country:
+		Global.map_keys["us"]:
+			Global.current_map = Global.map_keys["us"]
+		Global.map_keys["europe"]:
+			Global.current_map = Global.map_keys["europe"]
+		Global.map_keys["africa"]:
+			Global.current_map = Global.map_keys["africa"]
+		Global.map_keys["india"]:
+			Global.current_map = Global.map_keys["india"]
+	SceneTransition.change_scene("res://scenes/main/main.tscn")
 
 func _on_close_panel_pressed() -> void:
 	close_all_popup()

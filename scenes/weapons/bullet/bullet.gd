@@ -21,7 +21,7 @@ func _ready() -> void:
 
 	if stats.aoe:
 		aoe_fire_sfx.play()
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.6).timeout
 		queue_free()
 	else:
 		normal_bullet_fire_sfx.play()
