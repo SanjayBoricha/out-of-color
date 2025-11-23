@@ -6,7 +6,7 @@ signal dot(dpt, duration)
 signal freeze
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is HitComponent:
+	if area is HitComponent:		
 		hurt.emit(area.hit_damage)
 
 		if area.dot:
