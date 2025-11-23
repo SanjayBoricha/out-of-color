@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsrswrgdj3aa0"]
+[gd_scene load_steps=10 format=3 uid="uid://bsrswrgdj3aa0"]
 
 [ext_resource type="Script" uid="uid://dijxpexfddkxj" path="res://scenes/characters/enemies/enemy.gd" id="1_blu3w"]
 [ext_resource type="Texture2D" uid="uid://i5b2j6yygcj6" path="res://assets/characters/slime.png" id="2_blu3w"]
@@ -16,6 +16,8 @@ radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qj54i"]
 radius = 9.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ihb4b"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -42,3 +44,19 @@ max_damage = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_qj54i")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 120
+texture = SubResource("CanvasTexture_ihb4b")
+lifetime = 0.09999999999999999
+one_shot = true
+speed_scale = 0.2
+explosiveness = 1.0
+fract_delta = false
+direction = Vector2(0, 0)
+spread = 150.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 500.0
+angular_velocity_min = 672.79
+angular_velocity_max = 682.79

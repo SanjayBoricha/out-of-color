@@ -10,10 +10,19 @@ class_name BulletStats
 @export var freeze: bool = false
 
 func get_sprite_texture():
-	match type:
-		Global.BulletType.RED:
-			return load("res://assets/weapons/bullets/red_bullet.png")
-		Global.BulletType.GREEN:
-			return load("res://assets/weapons/bullets/green_bullet.png")
-		Global.BulletType.BLUE:
-			return load("res://assets/weapons/bullets/blue_bullet.png")
+	if aoe == false:
+		match type:
+			Global.BulletType.RED:
+				return load("res://assets/weapons/bullets/red_bullet.png")
+			Global.BulletType.GREEN:
+				return load("res://assets/weapons/bullets/green_bullet.png")
+			Global.BulletType.BLUE:
+				return load("res://assets/weapons/bullets/blue_bullet.png")
+	else:
+		match type:
+			Global.BulletType.RED:
+				return load("res://assets/weapons/bullets/red_slash.png")
+			Global.BulletType.GREEN:
+				return load("res://assets/weapons/bullets/green_slash.png")
+			Global.BulletType.BLUE:
+				return load("res://assets/weapons/bullets/blue_slash.png")

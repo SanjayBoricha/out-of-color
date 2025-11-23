@@ -4,6 +4,7 @@ class_name Enemy
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hurt_component: HurtComponent = $HurtComponent
 @onready var damage_component: DamageComponent = $DamageComponent
+@onready var death_particles: CPUParticles2D = $CPUParticles2D
 
 @export var target: Node = null
 @export var stats: EnemyStats
@@ -58,7 +59,7 @@ func on_unfreeze() -> void:
 
 func on_max_damage_reached() -> void:
 	Global.add_to_points(stats.hp)
-	queue_free()
+	die()
 
 func keep_spacing():
 	var others = get_tree().get_nodes_in_group("enemy")
@@ -70,3 +71,10 @@ func keep_spacing():
 		var dist = global_position.distance_to(e.global_position)
 		if dist < 20:   # pixels separation
 			velocity += (global_position - e.global_position).normalized() * 50
+
+
+func die():
+	sprite_2d.visible = false	
+	death_particles.emitting = true
+	await get_tree().create_timer(death_particles.lifetime + 0.1).timeout
+	queue_free()

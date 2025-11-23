@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://2ekq0bv3foxi"]
 
 [ext_resource type="Script" uid="uid://bckma0jqala51" path="res://scenes/weapons/bullet/bullet.gd" id="1_8t6s7"]
-[ext_resource type="Texture2D" uid="uid://bc7k1ta5olpu2" path="res://assets/weapons/bullets/red_bullet.png" id="1_xc2js"]
 [ext_resource type="PackedScene" uid="uid://cuvmt3bdpugd0" path="res://components/hit_component.tscn" id="2_pjntg"]
+[ext_resource type="Texture2D" uid="uid://dhkktcmdcsk1u" path="res://assets/weapons/bullets/red_slash.png" id="3_dbjur"]
 [ext_resource type="AudioStream" uid="uid://cw2sllpk37glh" path="res://assets/sounds/normal_bullet_fire.ogg" id="3_v8mmc"]
 [ext_resource type="Texture2D" uid="uid://cwn6bue1cv6d7" path="res://assets/weapons/bullets/nova.png" id="4_5prnu"]
 [ext_resource type="AudioStream" uid="uid://daayig2b2sbbh" path="res://assets/sounds/aoe_bullet_fire.ogg" id="4_h2usb"]
@@ -36,7 +36,7 @@ script = ExtResource("1_8t6s7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_xc2js")
+texture = ExtResource("3_dbjur")
 
 [node name="NormalBulletFireSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_v8mmc")
@@ -51,6 +51,9 @@ bus = &"SFX"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_8t6s7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitComponent"]
+polygon = PackedVector2Array(-8, 3, -5, 0, 0, -1, 5, 0, 8, 3, 8, 4, 4, 3, -5, 3, -8, 4)
 
 [node name="Fireball" type="GPUParticles2D" parent="."]
 visible = false

@@ -57,7 +57,6 @@ script = ExtResource("1_wrc37")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_uxumf")
-autoplay = true
 bus = &"Music"
 
 [node name="MouseHoverSFX" type="AudioStreamPlayer2D" parent="."]
