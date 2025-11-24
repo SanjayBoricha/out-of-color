@@ -61,7 +61,7 @@ var attack_range := 1.0:
 var damage := 1.0
 var turret_level := 1
 
-func _ready() -> void:	
+func _ready() -> void:
 	turrent_building_sfx.play()
 	point_light_2d.visible = Global.is_night
 
@@ -91,7 +91,7 @@ func try_get_closest_target():
 	var closest = 10000
 	var closest_area = null
 	for area in $DetectionArea.get_overlapping_areas():
-		var parent: Enemy = area.get_parent()
+		var parent = area.get_parent()
 		if parent is Enemy and (parent.damage_component.status_effect == Global.StatusEffect.NONE or parent.damage_component.status_effect != current_status_effect):
 			var dist = area.position.distance_to(position)
 			if dist < closest:
@@ -138,7 +138,6 @@ func attack():
 		bullet.position = position
 		bullet.direction = (current_target.position - position).normalized()
 		get_parent().add_child(bullet)
-		
 		#if current_status_effect != Global.StatusEffect.NONE:
 		current_target = null
 	else:

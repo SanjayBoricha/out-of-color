@@ -44,8 +44,7 @@ bus = &"SFX"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(2.025, 1.9335)
+scale = Vector2(2.2, 2.2)
 texture = ExtResource("2_ch67r")
 offset = Vector2(-0.19753027, 0.55029774)
 
