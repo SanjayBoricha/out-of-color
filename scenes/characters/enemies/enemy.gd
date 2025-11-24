@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+#@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_component: HurtComponent = $HurtComponent
 @onready var damage_component: DamageComponent = $DamageComponent
 @onready var death_particles: CPUParticles2D = $CPUParticles2D
@@ -19,8 +20,11 @@ func _ready() -> void:
 	agent = $NavigationAgent2D
 	agent.avoidance_enabled = true
 	
-	if sprite_2d.material:
-		sprite_2d.material = sprite_2d.material.duplicate()
+	#if sprite_2d.material:
+		#sprite_2d.material = sprite_2d.material.duplicate()
+	
+	if animated_sprite_2d.material:
+		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 	
 	$NavigationAgent2D.target_position = target.global_position
 	hurt_component.hurt.connect(on_hurt)
@@ -28,7 +32,8 @@ func _ready() -> void:
 	hurt_component.freeze.connect(on_freeze)
 	damage_component.max_damage_reached.connect(on_max_damage_reached)
 	damage_component.clear_dot.connect(on_clear_dot)
-	sprite_2d.texture = stats.get_sprite_texture()
+	#sprite_2d.texture = stats.get_sprite_texture()
+	animated_sprite_2d.play(stats.get_sprite_animation())
 	damage_component.max_damage = stats.hp
 
 func _physics_process(_delta: float) -> void:
@@ -44,11 +49,13 @@ func on_hurt(hit_damage: int) -> void:
 func on_dot(dpt: int, duration: float) -> void:
 	damage_component.apply_dot(dpt, duration)
 	status_effects.append(Global.StatusEffect.DOT)
-	sprite_2d.material.set_shader_parameter("intensity", 0.6)
+	#sprite_2d.material.set_shader_parameter("intensity", 0.6)
+	animated_sprite_2d.material.set_shader_parameter("intensity", 0.6)
 
 func on_clear_dot() -> void:
 	status_effects.remove_at(status_effects.bsearch(Global.StatusEffect.DOT))
-	sprite_2d.material.set_shader_parameter("intensity", 0.0)
+	#sprite_2d.material.set_shader_parameter("intensity", 0.0)
+	animated_sprite_2d.material.set_shader_parameter("intensity", 0.0)
 
 func on_freeze() -> void:
 	#print("on_freeze")
@@ -74,7 +81,8 @@ func keep_spacing():
 
 
 func die():
-	sprite_2d.visible = false	
+	#sprite_2d.visible = false
+	animated_sprite_2d.visible = false
 	death_particles.emitting = true
 	await get_tree().create_timer(death_particles.lifetime + 0.1).timeout
 	queue_free()

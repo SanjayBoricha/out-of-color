@@ -22,6 +22,7 @@ func _ready() -> void:
 func _draw() -> void:
 	Global.use_points(Global.current_points)
 	Global.add_to_points(35)
+	get_tree().paused = false
 
 func _on_max_enemies_entered() -> void:
 	get_tree().paused = true

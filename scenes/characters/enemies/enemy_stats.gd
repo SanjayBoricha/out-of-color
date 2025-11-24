@@ -6,11 +6,11 @@ class_name EnemyStats
 @export var speed: float
 @export var hp: int
 
-func get_sprite_texture():
+func get_sprite_animation():
 	match type:
 		Global.EnemyTypes.CIRCLE:
-			return load("res://assets/characters/slime.png")
+			return "circle"
 		Global.EnemyTypes.TRIANGLE:
-			return load("res://assets/characters/triangle.png")
+			return "triangle"
 		Global.EnemyTypes.SQUARE:
-			return load("res://assets/characters/square.png")
+			return "square"

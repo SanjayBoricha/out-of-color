@@ -1,15 +1,84 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsrswrgdj3aa0"]
+[gd_scene load_steps=20 format=3 uid="uid://bsrswrgdj3aa0"]
 
 [ext_resource type="Script" uid="uid://dijxpexfddkxj" path="res://scenes/characters/enemies/enemy.gd" id="1_blu3w"]
-[ext_resource type="Texture2D" uid="uid://i5b2j6yygcj6" path="res://assets/characters/slime.png" id="2_blu3w"]
 [ext_resource type="Shader" uid="uid://cyvtk80ohvvms" path="res://scenes/characters/enemies/poison.gdshader" id="2_ihb4b"]
+[ext_resource type="Texture2D" uid="uid://d3hnnbj20ruud" path="res://assets/characters/square_spritesheet.png" id="2_qj54i"]
+[ext_resource type="Texture2D" uid="uid://c11qdabbeioes" path="res://assets/characters/circle_spritesheet.png" id="3_8e52f"]
 [ext_resource type="PackedScene" uid="uid://bcinkg8pimvb8" path="res://components/damage_component.tscn" id="3_qj54i"]
 [ext_resource type="PackedScene" uid="uid://b1svmn5gj0rxp" path="res://components/hurt_component.tscn" id="4_ihb4b"]
+[ext_resource type="Texture2D" uid="uid://cn4606uysrvli" path="res://assets/characters/triangle_spritesheet.png" id="4_ksqmq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksqmq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxrkf"]
 shader = ExtResource("2_ihb4b")
 shader_parameter/intensity = 0.0
 shader_parameter/poison_color = Color(0.2, 1, 0.2, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksqmq"]
+atlas = ExtResource("3_8e52f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e52f"]
+atlas = ExtResource("3_8e52f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxrkf"]
+atlas = ExtResource("3_8e52f")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj54i"]
+atlas = ExtResource("2_qj54i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihb4b"]
+atlas = ExtResource("2_qj54i")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmxl0"]
+atlas = ExtResource("4_ksqmq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60ha2"]
+atlas = ExtResource("4_ksqmq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ltw38"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksqmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e52f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxrkf")
+}],
+"loop": true,
+"name": &"circle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj54i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihb4b")
+}],
+"loop": true,
+"name": &"square",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmxl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60ha2")
+}],
+"loop": true,
+"name": &"triangle",
+"speed": 6.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w0ky3"]
 radius = 5.0
@@ -23,11 +92,13 @@ radius = 9.0
 collision_layer = 2
 script = ExtResource("1_blu3w")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ksqmq")
-position = Vector2(0, -10)
-scale = Vector2(1.75, 1.531)
-texture = ExtResource("2_blu3w")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_mxrkf")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_ltw38")
+animation = &"triangle"
+autoplay = "circle"
+frame_progress = 0.009040794
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -49,7 +120,7 @@ shape = SubResource("CircleShape2D_qj54i")
 emitting = false
 amount = 120
 texture = SubResource("CanvasTexture_ihb4b")
-lifetime = 0.09999999999999999
+lifetime = 0.1
 one_shot = true
 speed_scale = 0.2
 explosiveness = 1.0

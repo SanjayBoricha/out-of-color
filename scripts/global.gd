@@ -21,6 +21,7 @@ enum StatusEffect {
 signal wave_start(wave)
 signal points_update(points)
 signal max_enemies_entered
+signal game_completed
 
 const map_keys = {
 	"us": "us",
