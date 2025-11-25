@@ -84,5 +84,6 @@ func die():
 	#sprite_2d.visible = false
 	animated_sprite_2d.visible = false
 	death_particles.emitting = true
+	Global.o7(get_instance_id())
 	await get_tree().create_timer(death_particles.lifetime + 0.1).timeout
 	queue_free()

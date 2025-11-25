@@ -18,10 +18,12 @@ enum StatusEffect {
 	FREEZE,
 }
 
-signal wave_start(wave)
-signal points_update(points)
+signal wave_start(wave: int)
+signal points_update(points: int)
 signal max_enemies_entered
 signal game_completed
+signal enemy_killed
+signal enemy_entered
 
 const map_keys = {
 	"us": "us",
@@ -46,22 +48,30 @@ var current_map: String
 var current_wave: int = 0
 var current_points: int = 0
 
-var enemies_entered: int = 0
-var max_enemies: int = 5
+var entered_enemies: int = 0
+var max_entered_enemies: int = 5
+var killed_enemies: int = 0
+var killed_enemies_set := {}
 
 func wave_started(wave: int) -> void:
 	current_wave = wave
 	wave_start.emit(current_wave)
 
-func add_to_points(points) -> void:
+func add_to_points(points: int) -> void:
 	current_points += points
 	points_update.emit(current_points)
 
-func use_points(points) -> void:
+func use_points(points: int) -> void:
 	current_points -= points
 	points_update.emit(current_points)
 
 func increment_enemy_entered() -> void:
-	enemies_entered += 1
-	if enemies_entered >= max_enemies:
+	entered_enemies += 1
+	if entered_enemies >= max_entered_enemies:
 		max_enemies_entered.emit()
+	enemy_entered.emit()
+
+func o7(enemy_id: int) -> void:
+	killed_enemies_set[enemy_id] = true
+	killed_enemies = killed_enemies_set.keys().size()
+	enemy_killed.emit()

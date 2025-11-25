@@ -18,6 +18,7 @@ func _ready() -> void:
 	Global.max_enemies_entered.connect(_on_max_enemies_entered)
 	restart_button.pressed.connect(_restart_game)
 	quit_button.pressed.connect(_quit_game)
+	Global.game_completed.connect(_on_game_complete)
 
 func _draw() -> void:
 	Global.use_points(Global.current_points)
@@ -25,6 +26,10 @@ func _draw() -> void:
 	get_tree().paused = false
 
 func _on_max_enemies_entered() -> void:
+	get_tree().paused = true
+	game_over.visible = true
+
+func _on_game_complete() -> void:
 	get_tree().paused = true
 	game_over.visible = true
 

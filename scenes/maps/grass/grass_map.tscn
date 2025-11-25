@@ -50,9 +50,6 @@ position = Vector2(-178, 354)
 [node name="EnemyBase" type="Node2D" parent="."]
 script = ExtResource("3_k2tbn")
 
-[node name="WaveTimer" type="Timer" parent="EnemyBase"]
-wait_time = 10.0
-
 [node name="EnemyTimer" type="Timer" parent="EnemyBase"]
 wait_time = 0.5
 
@@ -62,6 +59,23 @@ wait_time = 0.5
 unique_name_in_owner = true
 position = Vector2(1334, 308)
 shape = SubResource("CircleShape2D_k2tbn")
+
+[node name="NextWaveCanvas" type="CanvasLayer" parent="EnemyBase"]
+offset = Vector2(1200, 0)
+transform = Transform2D(1, 0, 0, 1, 1200, 0)
+
+[node name="PanelContainer" type="PanelContainer" parent="EnemyBase/NextWaveCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="NextWaveLabel" type="Label" parent="EnemyBase/NextWaveCanvas/PanelContainer"]
+layout_mode = 2
+text = "Next wave"
+horizontal_alignment = 1
 
 [node name="TurretPlacements" type="Node2D" parent="."]
 
@@ -89,5 +103,4 @@ offset_top = 467.0
 offset_right = 1035.0
 offset_bottom = 595.0
 
-[connection signal="timeout" from="EnemyBase/WaveTimer" to="EnemyBase" method="start_wave"]
 [connection signal="timeout" from="EnemyBase/EnemyTimer" to="EnemyBase" method="spawn_enemy"]
