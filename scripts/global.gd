@@ -53,6 +53,13 @@ var max_entered_enemies: int = 5
 var killed_enemies: int = 0
 var killed_enemies_set := {}
 
+func reset_state() -> void:
+	current_wave = 0
+	current_points = 0
+	entered_enemies = 0
+	killed_enemies = 0
+	killed_enemies_set = {}
+
 func wave_started(wave: int) -> void:
 	current_wave = wave
 	wave_start.emit(current_wave)

@@ -36,6 +36,7 @@ func _ready() -> void:
 	sfx_audio_bus_id = AudioServer.get_bus_index("SFX")
 	Input.set_custom_mouse_cursor(cursor)
 	close_all_popup()
+	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

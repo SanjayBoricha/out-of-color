@@ -10,7 +10,7 @@ func _on_area_entered(area: Area2D) -> void:
 		hurt.emit(area.hit_damage)
 
 		if area.dot:
-			dot.emit(1, 5)
+			dot.emit(1, 3)
 
 		if area.freeze:
 			freeze.emit()

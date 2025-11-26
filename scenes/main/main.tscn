@@ -49,6 +49,7 @@ size_flags_horizontal = 3
 
 [node name="WaveCount" type="Label" parent="UI/HUD/PanelContainer/Panel/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Wave: 1"
@@ -59,8 +60,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Points: 0"
 
-[node name="Button" type="Button" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
-visible = false
+[node name="PauseButton" type="Button" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_direction = 3
 layout_mode = 2
 text = "Pause"
@@ -89,7 +91,8 @@ grow_vertical = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer"]
+[node name="GameOverLabel" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Game Over"
@@ -100,11 +103,13 @@ layout_mode = 2
 alignment = 1
 
 [node name="WaveSurvidedCount" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Total waves survived: 0"
 horizontal_alignment = 1
 
 [node name="KillCount" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Total kills: 0"
 horizontal_alignment = 1
@@ -119,6 +124,50 @@ layout_mode = 2
 text = "Restart"
 
 [node name="QuitButton" type="Button" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="GamePaused" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="Control" type="Control" parent="GamePaused"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GamePaused/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePaused/Control/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GamePaused/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GamePaused/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="GamePaused/Control/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="MainMenuButton" type="Button" parent="GamePaused/Control/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"

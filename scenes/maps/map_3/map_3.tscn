@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=4 uid="uid://c2hm2f0bjfcdk"]
+[gd_scene load_steps=8 format=4 uid="uid://c2hm2f0bjfcdk"]
 
 [ext_resource type="TileSet" uid="uid://cktyjo3bugcbw" path="res://scenes/maps/base_map.tres" id="1_3xl5y"]
 [ext_resource type="PackedScene" uid="uid://tftsjbuq8l2v" path="res://scenes/maps/components/turret_placement.tscn" id="2_r1ntq"]
+[ext_resource type="PackedScene" uid="uid://dfo3ci5kdbj4" path="res://scenes/characters/king.tscn" id="3_y0lfl"]
+[ext_resource type="Script" uid="uid://btygufqfdukn4" path="res://scenes/maps/map_3/enemy_base.gd" id="4_y0lfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0efa"]
+size = Vector2(241.5, 115.5)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_y0lfl"]
+vertices = PackedVector2Array(154.10156, -91.046875, 310.39063, -91.9375, 313.59375, -11.8515625, 243.03906, -10.859375, 203.8125, -14.203125, 154.89063, -13.203125, 208.92188, 255.74219, 241.97656, 226.99219, 288.07813, 333.96875, 312.65625, 300.9297, 458.82813, 333.02344, 440.14063, 303.0703, 604.8594, 187, 577.25, 162.95313, 732.84375, 161.11719, 682.60156, 187, 732.03906, 213.67969, 703.75, 211.67969, 667.3594, 303.02344, 631.3828, 280.89844, 637.1797, 346.3125, 672.71094, 313.84375, 796, 351.85156, 760.8828, 316.10156, 856.03125, 225.95313, 903.6406, 244.21094, 943.7578, 225.03906, 1046.0391, 372.59375, 1068.0234, 355.03125, 1068.9688, 514.78125, 1044.9609, 493.45313, 955.8828, 624.0703, 935.8828, 593, 859.28906, 625.90625, 887.84375, 593, 725.4297, 481.0625, 747.7578, 451.9297, 579.03125, 449.14844, 644.21875, 479.92188, 575.4531, 484.9375, 638.3828, 490.21094, 643.46875, 545.96094, 669.0469, 539.9219, 670.78906, 622, 639.03906, 588.7969, 506.35938, 622, 537.7969, 591.10156, 391.39844, 498.03906, 402.6172, 448.90625, 268.9922, 446.07813, 279.89844, 496.96094, 160, 553.1875, 192, 584.8594, 160, 672.2422, 192, 675.3203, 257.65625, 748, 97, 748, 97, 677.22656, 262.32813, 680.27344)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 5, 0), PackedInt32Array(6, 4, 3, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(15, 14, 16, 17), PackedInt32Array(17, 16, 18, 19), PackedInt32Array(20, 19, 18, 21), PackedInt32Array(22, 20, 21, 23), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(25, 24, 26), PackedInt32Array(27, 25, 26, 28), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(30, 29, 31, 32), PackedInt32Array(32, 31, 33, 34), PackedInt32Array(34, 33, 35, 36), PackedInt32Array(37, 36, 35, 38), PackedInt32Array(39, 37, 38, 40), PackedInt32Array(41, 39, 40, 42), PackedInt32Array(41, 42, 43, 44), PackedInt32Array(44, 43, 45, 46), PackedInt32Array(46, 45, 47, 48), PackedInt32Array(49, 48, 47, 50), PackedInt32Array(51, 49, 50, 52), PackedInt32Array(53, 51, 52, 54), PackedInt32Array(55, 56, 57, 53, 54), PackedInt32Array(55, 54, 58)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(194, -4, 145, -3, 144, -101, 320, -102, 324, -2, 253, -1, 252, 223, 317, 291, 436, 293, 573, 153, 743, 151, 742, 217, 679, 304, 757, 306, 852, 216, 948, 215, 1078, 351, 1079, 519, 960, 634, 855, 636, 721, 491, 650, 490, 679, 537, 681, 632, 502, 632, 387, 508, 284, 507, 202, 589, 202, 666, 273, 671, 267, 758, 87, 758, 87, 668, 150, 663, 150, 549, 265, 436, 407, 439, 542, 581, 630, 579, 633, 550, 565, 489, 570, 439, 752, 442, 892, 583, 932, 583, 1035, 489, 1036, 377, 904, 258, 800, 362, 628, 356, 621, 277, 690, 211, 678, 197, 609, 197, 463, 343, 284, 344, 199, 260)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc8dp"]
+radius = 11.0
 
 [node name="Map 3" type="Node2D"]
 
@@ -68,3 +81,48 @@ offset_left = 366.0
 offset_top = 397.00003
 offset_right = 494.0
 offset_bottom = 525.0
+
+[node name="Kingdom" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kingdom"]
+position = Vector2(158.25, 711.25)
+shape = SubResource("RectangleShape2D_b0efa")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_y0lfl")
+
+[node name="King" parent="." instance=ExtResource("3_y0lfl")]
+unique_name_in_owner = true
+position = Vector2(177, 705)
+
+[node name="EnemyBase" type="Node2D" parent="."]
+script = ExtResource("4_y0lfl")
+
+[node name="EnemyTimer" type="Timer" parent="EnemyBase"]
+wait_time = 0.5
+
+[node name="Area2D" type="Area2D" parent="EnemyBase"]
+
+[node name="EnemySpawnPoint" type="CollisionShape2D" parent="EnemyBase/Area2D"]
+unique_name_in_owner = true
+position = Vector2(228, -57)
+shape = SubResource("CircleShape2D_fc8dp")
+
+[node name="NextWaveCanvas" type="CanvasLayer" parent="EnemyBase"]
+offset = Vector2(1200, 0)
+transform = Transform2D(1, 0, 0, 1, 1200, 0)
+
+[node name="PanelContainer" type="PanelContainer" parent="EnemyBase/NextWaveCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="NextWaveLabel" type="Label" parent="EnemyBase/NextWaveCanvas/PanelContainer"]
+layout_mode = 2
+text = "Next wave"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="EnemyBase/EnemyTimer" to="EnemyBase" method="spawn_enemy"]

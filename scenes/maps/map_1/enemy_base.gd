@@ -15,12 +15,44 @@ var enemy_type_resources: Array[EnemyStats] = [
 ]
 
 var waves = [
-	[[0, 10]],
-	[[0, 8], [1, 2]],
-	[[0, 3], [1, 7]],
-	[[0, 2], [1, 6], [2, 2]],
-	[[1, 5], [2, 5]],
-	[[2, 10]]
+[[0, 10]],                      # Wave 1 — easy
+	[[0, 12]],                      # Wave 2 — easy
+
+	# Early pressure
+	[[0, 8], [1, 4]],               # Wave 3
+	[[0, 8], [1, 6]],               # Wave 4
+
+	# Medium enemies growing
+	[[0, 6], [1, 10]],              # Wave 5
+	[[0, 6], [1, 12]],              # Wave 6
+
+	# Introduction of hard
+	[[0, 5], [1, 12], [2, 1]],      # Wave 7
+	[[0, 4], [1, 14], [2, 1]],      # Wave 8
+
+	# Weak enemy starts to fade
+	[[0, 3], [1, 15], [2, 2]],      # Wave 9
+	[[0, 3], [1, 16], [2, 3]],      # Wave 10
+
+	# Mid-game difficulty
+	[[0, 2], [1, 17], [2, 4]],      # Wave 11
+	[[0, 2], [1, 18], [2, 4]],      # Wave 12
+
+	# Weak enemies nearly gone
+	[[0, 1], [1, 18], [2, 5]],      # Wave 13
+	[[0, 1], [1, 18], [2, 6]],      # Wave 14
+
+	# Mostly strong waves
+	[[1, 17], [2, 6]],              # Wave 15
+	[[1, 16], [2, 7]],              # Wave 16
+
+	# Big spikes
+	[[1, 15], [2, 8]],              # Wave 17
+	[[1, 14], [2, 9]],              # Wave 18
+
+	# Endgame pressure
+	[[1, 12], [2, 10]],             # Wave 19
+	[[1, 10], [2, 12]]              # Wave 20
 ]
 
 var spawned_enemies: int = 0
