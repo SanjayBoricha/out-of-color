@@ -6,6 +6,6 @@
 script = ExtResource("1_3cvik")
 name = "Mage"
 type = 1
-speed = 125.0
-hp = 5
+speed = 110.0
+hp = 10
 metadata/_custom_type_script = "uid://ycfhhe7x05o4"

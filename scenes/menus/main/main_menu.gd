@@ -8,6 +8,8 @@ var sfx_audio_bus_id: int
 
 @onready var hover_sfx = $MouseHoverSFX
 @onready var click_sfx = $MouseClickSFX
+@onready var volume_button: TextureButton = $MarginContainer/SoundOptions/Volume
+@onready var sfx_button: TextureButton = $MarginContainer/SoundOptions/SFX
 @onready var india_popup_menu: MarginContainer = $IndiaPopupMenu
 @onready var us_popup_menu: MarginContainer = $UsPopupMenu
 @onready var europe_popup_menu: MarginContainer = $EuropePopupMenu
@@ -36,6 +38,12 @@ func _ready() -> void:
 	sfx_audio_bus_id = AudioServer.get_bus_index("SFX")
 	Input.set_custom_mouse_cursor(cursor)
 	close_all_popup()
+	if AudioServer.get_bus_volume_linear(music_audio_bus_id) == 0.0:
+		volume_button.button_pressed = true
+
+	if AudioServer.get_bus_volume_linear(sfx_audio_bus_id) == 0.0:
+		sfx_button.button_pressed = true
+
 	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
