@@ -8,7 +8,7 @@ extends Node2D
 @onready var wave_survided_count: Label = %WaveSurvidedCount
 @onready var kill_count: Label = %KillCount
 
-@onready var pause_button: Button = %PauseButton
+@onready var pause_button: TextureButton = %PauseButton
 @onready var game_paused: CanvasLayer = $GamePaused
 @onready var resume_button: Button = %ResumeButton
 @onready var main_menu_button: Button = %MainMenuButton

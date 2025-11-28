@@ -276,6 +276,7 @@ custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
 theme_override_font_sizes/normal_font_size = 14
+text = "We have detected some grey anomalies, take care of them asap!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UsPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -395,6 +396,7 @@ custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
 theme_override_font_sizes/normal_font_size = 14
+text = "Multiple cities have detected these creatures, defend against them and protect the region."
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EuropePopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -514,6 +516,7 @@ custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
 theme_override_font_sizes/normal_font_size = 14
+text = "They can survive in all kinds of climates...we don't know where they will strike next! "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AfricaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -633,13 +636,7 @@ custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 0.8352941)
 theme_override_font_sizes/normal_font_size = 14
-text = "This is the final front, and the grey anomalies are pouring in like ants from an anthill.
-
-You must hold the line and defend with everything you’ve got. Thankfully, it’s Holi the festival of colors.
-
-Hence, all bullets are supercharged, giving you a powerful edge.
-
-Use this burst of strength to defeat the relentless enemies and restore color to the world."
+text = "The grey anomalies are pouring in like ants from an anthill. We gotta go all in!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="IndiaPopupMenu/VBoxContainer/BaseMenuScreen/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2

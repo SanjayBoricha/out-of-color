@@ -13,7 +13,7 @@ config_version=5
 config/name="Out of Color"
 run/main_scene="uid://smvj3vn74sy"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://c1s6x4dwvj4o0"
 
 [autoload]
 

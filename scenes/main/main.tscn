@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://whi5t1pok5d"]
+[gd_scene load_steps=6 format=3 uid="uid://whi5t1pok5d"]
 
 [ext_resource type="Script" uid="uid://ctyrpp34qa3gf" path="res://scenes/main/main.gd" id="1_iuonh"]
 [ext_resource type="AudioStream" uid="uid://voejmcm3248w" path="res://assets/music/battle_theme.mp3" id="2_l3cfh"]
 [ext_resource type="Script" uid="uid://d1q5vk15gaqb7" path="res://scenes/main/hud.gd" id="3_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://bnubhlfvony2u" path="res://assets/images/ui/ui_sheet_white.png" id="4_l3cfh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3cfh"]
+atlas = ExtResource("4_l3cfh")
+region = Rect2(211, 358, 28, 32)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iuonh")
@@ -60,12 +65,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Points: 0"
 
-[node name="PauseButton" type="Button" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
+[node name="PauseButton" type="TextureButton" parent="UI/HUD/PanelContainer/Panel/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_direction = 3
 layout_mode = 2
-text = "Pause"
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_l3cfh")
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -89,6 +94,9 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver/Control/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="GameOverLabel" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer"]
@@ -100,6 +108,9 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver/Control/PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="WaveSurvidedCount" type="Label" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer"]
@@ -116,16 +127,22 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 alignment = 1
 
 [node name="RestartButton" type="Button" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Restart"
 
 [node name="QuitButton" type="Button" parent="GameOver/Control/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Main Menu"
 
 [node name="GamePaused" type="CanvasLayer" parent="."]
@@ -160,16 +177,23 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GamePaused/Control/PanelContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="ResumeButton" type="Button" parent="GamePaused/Control/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Resume"
 
 [node name="MainMenuButton" type="Button" parent="GamePaused/Control/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Main Menu"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
