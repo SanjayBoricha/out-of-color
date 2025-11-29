@@ -55,10 +55,10 @@ offset_right = 844.0
 offset_bottom = 296.0
 
 [node name="P4" parent="TurrentPlacements" instance=ExtResource("2_bc3j6")]
-offset_left = 1058.0
-offset_top = 291.0
-offset_right = 1186.0
-offset_bottom = 419.0
+offset_left = 953.0
+offset_top = 286.0
+offset_right = 1081.0
+offset_bottom = 414.0
 
 [node name="Kingdom" type="Area2D" parent="."]
 
